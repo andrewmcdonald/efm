@@ -1,129 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>EFM &mdash; Epub for Monocle</title>
-<!--
-Copyright (c) 2010 Joseph Pearson
-Copyright (c) 2013 Robert Schroll
+<html>
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Efm : Epub for Monocle — A pure javascript implementation of the book data interface for Epub2 and Epub3" />
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
--->
-<script src="js/zip.js"></script>
-<script src="js/monocore.js"></script>
-<script src="js/monoctrl.js"></script>
-<script src="efm.js"></script>
-<script type="text/javascript" charset="utf-8">
-// This is some basic code for using Monocle with EFM.
-// First, we need to tell zip.js where to find its accessory files.
-zip.workerScriptsPath = "js/"
+    <title>Efm</title>
+  </head>
 
-// An event handler for our file input.
-function fileSelected(event) {
-    var files = event.target.files;
-    if (files.length > 0)
-        new Epub(files[0], createReader);
-}
+  <body>
 
-// This will be called when the Epub object is fully initialized and
-// ready to get passed to the Monocle.Reader.
-function createReader(bookData) {
-    Monocle.Reader("reader", bookData,  // The id of the reader element and the book data.
-        { flipper: Monocle.Flippers.Instant,  // The rest is just fanciness:
-          panels: Monocle.Panels.Magic },     // No animation and click anywhere
-        function (reader) {                   // to turn pages.
-            var stencil = new Monocle.Controls.Stencil(reader);  // Make internal links work.
-            reader.addControl(stencil);
-            var toc = Monocle.Controls.Contents(reader);         // Add a table of contents.
-            reader.addControl(toc, 'popover', { hidden: true });
-            createBookTitle(reader, { start: function () { reader.showControl(toc); } });
-        }
-    );
-}
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/andrewmcdonald/efm">View on GitHub</a>
 
-// This adds the book title to the top of each page.
-function createBookTitle(reader, contactListeners) {
-    var bt = {}
-    bt.createControlElements = function () {
-        cntr = document.createElement('div');
-        cntr.className = "bookTitle";
-        runner = document.createElement('div');
-        runner.className = "runner";
-        runner.innerHTML = reader.getBook().getMetaData('title');
-        cntr.appendChild(runner);
-        if (contactListeners) {
-            Monocle.Events.listenForContact(cntr, contactListeners);
-        }
-        return cntr;
-    }
-    reader.addControl(bt, 'page');
-    return bt;
-}
-</script>
-<link rel="stylesheet" type="text/css" href="css/monocore.css" />
-<link rel="stylesheet" type="text/css" href="css/monoctrl.css" />
-<style type="text/css">
-body {
-    background: #eef;
-    font-family: "sans-serif";
-}
-h1 {
-    text-align: center;
-}
-#reader {
-    width: 450px;
-    height: 600px;
-    border: 1px solid black;
-    margin: 0 auto;
-    background: white;
-}
-#reader p {
-    margin: 1em;
-}
-.runner {
-    font-variant: small-caps;
-    font-size: 87%;
-    color: #900;
-}
-.bookTitle {
-    position: absolute;
-    top: 0%;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-}
-body > p {
-    width: 450px;
-    margin: 1em auto;
-}
-</style>
-</head>
+          <h1 id="project_title">Efm</h1>
+          <h2 id="project_tagline">Epub for Monocle — A pure javascript implementation of the book data interface for Epub2 and Epub3</h2>
 
-<body>
-<h1>EFM &mdash; Epub for Monocle</h1>
-<div id="reader">
-<p>Select an Epub file to read:
-<input type="file" id="file" accept="application/epub+zip" onchange="fileSelected(event)" />
-</p>
-</div>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/andrewmcdonald/efm/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/andrewmcdonald/efm/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-<p>This is a demonstration of an Epub reader based on <a href="http://monocle.inventivelabs.com.au/">Monocle</a>, implemented entirely in Javascript.  It uses the <a href="https://github.com/rschroll/efm">EFM library</a>, which should be able to deal with many Epub2 and Epub3 files.  If you're interested, you can see the <a href="https://github.com/rschroll/efm/tree/gh-pages">code for this example</a>.</p>
-</body>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>Welcome to GitHub Pages.</h3>
+
+<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
+
+<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+
+<h3>Designer Templates</h3>
+
+<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+
+<h3>Rather Drive Stick?</h3>
+
+<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+
+<h3>Authors and Contributors</h3>
+
+<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+
+<h3>Support or Contact</h3>
+
+<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Efm maintained by <a href="https://github.com/andrewmcdonald">andrewmcdonald</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
 </html>
